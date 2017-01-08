@@ -5,10 +5,6 @@
  */
 package kiosk;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -59,7 +55,7 @@ public class ActivationCardTest {
         ActivationCard test = new ActivationCard("testCode");
         ActivationCard test2 = new ActivationCard("NoCode");
        
-        assertFalse("Comprobar dos codis son iguals", test.equals(test2));
+        assertFalse("Comprobar dos codis no son iguals", test.equals(test2));
     }
     
 }

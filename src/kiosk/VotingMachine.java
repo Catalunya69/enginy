@@ -5,9 +5,8 @@
  */
 package kiosk;
 
-import data.MailAddress;
-import data.Vote;
-import services.ValidationService;
+import data.*;
+import services.*;
 
 /**
  *
@@ -15,16 +14,45 @@ import services.ValidationService;
  */
 public class VotingMachine {
     
-    public VotingMachine(){
-        
+    private boolean active;
+    private ValidationService validService;
+    private VotePrinter votePrinter;
+    private VotesDB votesDB;
+    private SignatureService sigService;
+    private MailerService mailService;
+    
+    private Signature signature;
+    private ActivationCard card;
+    
+    public VotingMachine(ActivationCard card){
+        this.active = false;
     }
     
     public void setValidationService(ValidationService validationService) {
-        
+        this.validService = validationService;
+    }
+    public void setVotePrinter(VotePrinter votePrinter) {
+        this.votePrinter = votePrinter;
+    }
+    public void setVotesDB(VotesDB votesDB) {
+        this.votesDB = votesDB;
+    }
+    public void setSignatureService(SignatureService sigService) {
+        this.sigService = sigService;
+    }
+    public void setMailerService(MailerService mailService) {
+        this.mailService = mailService;
     }
     
     public void activateEmission(ActivationCard card) throws IllegalStateException { 
         
+        
+        if(this.active) throw new IllegalStateException("Machine already active");
+           
+        if(validService.validate(this.card)){
+            this.card = card;
+            this.active = true;            
+        }
     }
     
     public boolean canVote() { 
@@ -32,8 +60,12 @@ public class VotingMachine {
     }
     
     public void vote(Vote vote) throws IllegalStateException {
+        
+        validService.deactivate(this.card);
+        this.active = false;
     }
     
     public void sendReceipt(MailAddress address) throws IllegalStateException { 
+        mailService.send(address, this.signature);
     }
 }
