@@ -9,12 +9,12 @@ package kiosk;
  *
  * @author Roger
  */
-public class ActivationCard {
+final public class ActivationCard {
     
     private String code;
     private boolean active;
     
-    ActivationCard(String code){
+    public ActivationCard(String code){
         this.code = code;
         this.active = true;
     }
