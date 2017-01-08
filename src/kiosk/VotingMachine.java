@@ -21,10 +21,11 @@ public class VotingMachine {
     private SignatureService sigService;
     private MailerService mailService;
     
-    private Signature signature;
+    private Vote vote;
     private ActivationCard card;
     
-    public VotingMachine(ActivationCard card){
+    public VotingMachine(){
+        this.card = null;
         this.active = false;
     }
     
@@ -47,25 +48,34 @@ public class VotingMachine {
     public void activateEmission(ActivationCard card) throws IllegalStateException { 
         
         
-        if(this.active) throw new IllegalStateException("Machine already active");
+        if(this.active) throw new IllegalStateException("No se puede votar");
            
-        if(validService.validate(this.card)){
+        if(validService.validate(card)){
             this.card = card;
             this.active = true;            
         }
     }
     
     public boolean canVote() { 
-        return true;
+        return active;
     }
     
     public void vote(Vote vote) throws IllegalStateException {
         
+        if(!canVote()) throw new IllegalStateException("No se puede votar");
+        
+        votesDB.registerVote(vote);
+        votePrinter.print(vote);
         validService.deactivate(this.card);
         this.active = false;
+        this.vote = vote;
     }
     
     public void sendReceipt(MailAddress address) throws IllegalStateException { 
-        mailService.send(address, this.signature);
+        
+        if(card == null) throw new IllegalStateException("No se puede votar");
+        if(card != null && this.active==true) throw new IllegalStateException("No se ha votado");
+        
+        mailService.send(address, sigService.sign(vote));
     }
 }
