@@ -5,8 +5,8 @@
  */
 package services;
 
-import practicapu.MailAddress;
-import practicapu.Signature;
+import data.MailAddress;
+import data.Signature;
 
 /**
 * External service for sending mails

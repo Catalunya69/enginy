@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practicapu;
+package data;
 
 /**
  *
  * @author Roger
  */
-final public class Party {
-    private final String name;
+final public class MailAddress {
+    private final String address;
     
-    public Party(String name) {
-        this.name = name;
+    public MailAddress(String address) {
+        this.address = address;
     }
     
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
     @Override
     public String toString() {
-        return "Party{" +
-        "name='" + name + '\'' +
+        return "MailAddress{" +
+        "address='" + address + '\'' +
         '}';
     }
 
@@ -31,12 +31,13 @@ final public class Party {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Party party = (Party) o;
-        return name.equals(party.name);
+        MailAddress mail = (MailAddress) o;
+        return address.equals(mail.address);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return address.hashCode();
     }
+
 }

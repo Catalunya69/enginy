@@ -1,29 +1,30 @@
+package data;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practicapu;
 
 /**
  *
  * @author Roger
  */
-final public class MailAddress {
-    private final String address;
+final public class Vote {
+    private final String option;
     
-    public MailAddress(String address) {
-        this.address = address;
+    public Vote(String option) {
+        this.option = option;
     }
     
-    public String getAddress() {
-        return address;
+    public String getOption() {
+        return option;
     }
 
     @Override
     public String toString() {
-        return "MailAddress{" +
-        "address='" + address + '\'' +
+        return "Vote{" +
+        "option='" + option + '\'' +
         '}';
     }
 
@@ -31,13 +32,12 @@ final public class MailAddress {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MailAddress mail = (MailAddress) o;
-        return address.equals(mail.address);
+        Vote vote = (Vote) o;
+        return option.equals(vote.option);
     }
 
     @Override
     public int hashCode() {
-        return address.hashCode();
+        return option.hashCode();
     }
-
 }

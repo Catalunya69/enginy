@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practicapu;
+package data;
 
 /**
  *
  * @author Roger
  */
-final public class Signature {
-    private final byte[] sig;
+final public class Party {
+    private final String name;
     
-    public Signature(byte[] sig) {
-        this.sig = sig;
+    public Party(String name) {
+        this.name = name;
     }
     
-    public byte[] getSignature() {
-        return sig;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "{" +
-        "sig='" + sig + '\'' +
+        return "Party{" +
+        "name='" + name + '\'' +
         '}';
     }
 
@@ -31,12 +31,12 @@ final public class Signature {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Signature signature = (Signature) o;
-        return sig.equals(signature.sig);
+        Party party = (Party) o;
+        return name.equals(party.name);
     }
 
     @Override
     public int hashCode() {
-        return sig.hashCode();
+        return name.hashCode();
     }
 }

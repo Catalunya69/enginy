@@ -1,30 +1,29 @@
-package practicapu;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package data;
 
 /**
  *
  * @author Roger
  */
-final public class Vote {
-    private final String option;
+final public class Signature {
+    private final byte[] sig;
     
-    public Vote(String option) {
-        this.option = option;
+    public Signature(byte[] sig) {
+        this.sig = sig;
     }
     
-    public String getOption() {
-        return option;
+    public byte[] getSignature() {
+        return sig;
     }
 
     @Override
     public String toString() {
-        return "Vote{" +
-        "option='" + option + '\'' +
+        return "{" +
+        "sig='" + sig + '\'' +
         '}';
     }
 
@@ -32,12 +31,12 @@ final public class Vote {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Vote vote = (Vote) o;
-        return option.equals(vote.option);
+        Signature signature = (Signature) o;
+        return sig.equals(signature.sig);
     }
 
     @Override
     public int hashCode() {
-        return option.hashCode();
+        return sig.hashCode();
     }
 }

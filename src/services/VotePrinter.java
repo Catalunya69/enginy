@@ -5,7 +5,7 @@
  */
 package services;
 
-import practicapu.Vote;
+import data.Vote;
 
 /**
  *

@@ -5,8 +5,8 @@
  */
 package services;
 
-import practicapu.Signature;
-import practicapu.Vote;
+import data.Signature;
+import data.Vote;
 
 /**
 * External service for signing votes

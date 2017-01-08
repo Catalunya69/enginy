@@ -6,7 +6,7 @@
 package services;
 
 import java.util.List;
-import practicapu.Vote;
+import data.Vote;
 
 /**
 * Local service that registers votes.

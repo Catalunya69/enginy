@@ -5,8 +5,8 @@
  */
 package kiosk;
 
-import practicapu.MailAddress;
-import practicapu.Vote;
+import data.MailAddress;
+import data.Vote;
 import services.ValidationService;
 
 /**
