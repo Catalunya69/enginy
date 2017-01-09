@@ -5,6 +5,7 @@
  */
 package kiosk;
 
+import data.IrisScan;
 import data.MailAddress;
 import data.Signature;
 import data.Vote;
@@ -29,6 +30,7 @@ public class VotingMachineTest {
     private SignatureService siService;
     private VotePrinter voPrinter;
     private VotesDB voDB;
+    private IrisScanner irScanner;
     
     private static class ValidationServiceDouble implements ValidationService{
         @Override
@@ -72,6 +74,12 @@ public class VotingMachineTest {
             return votes;
         }
     }
+    private static class IrisScannerDouble implements IrisScanner{
+        @Override
+        public IrisScan scan(){
+            return new IrisScan("Code".getBytes());
+        }
+    }
     
     
     
@@ -83,6 +91,7 @@ public class VotingMachineTest {
         siService = new SignatureServiceDouble();
         voPrinter = new VotePrinterDouble();
         voDB = new VotesDBDouble();
+        irScanner = new IrisScannerDouble();
     }
     
     @Test
@@ -93,6 +102,7 @@ public class VotingMachineTest {
         test.setSignatureService(siService);
         test.setVotePrinter(voPrinter);
         test.setVotesDB(voDB);
+        test.setIrisScanner(irScanner);
         
         ActivationCard card = new ActivationCard("code");
         Vote vote = new Vote("Voto");
@@ -119,6 +129,7 @@ public class VotingMachineTest {
         test.setSignatureService(siService);
         test.setVotePrinter(voPrinter);
         test.setVotesDB(voDB);
+        test.setIrisScanner(irScanner);
         
         ActivationCard card = new ActivationCard("code");
         Vote vote = new Vote("Voto");

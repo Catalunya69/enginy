@@ -20,6 +20,7 @@ public class VotingMachine {
     private VotesDB votesDB;
     private SignatureService sigService;
     private MailerService mailService;
+    private IrisScanner irisScanner;
     
     private Vote vote;
     private ActivationCard card;
@@ -44,6 +45,9 @@ public class VotingMachine {
     public void setMailerService(MailerService mailService) {
         this.mailService = mailService;
     }
+    public void setIrisScanner(IrisScanner irisScanner) {
+        this.irisScanner = irisScanner;
+    }
     
     public void activateEmission(ActivationCard card) throws IllegalStateException { 
         
@@ -51,8 +55,17 @@ public class VotingMachine {
         if(this.active) throw new IllegalStateException("No se puede votar");
            
         if(validService.validate(card)){
-            this.card = card;
-            this.active = true;            
+            
+            if(!card.isScan()){
+                this.card = card;
+                this.active = true;
+            }else{
+                IrisScan scan = irisScanner.scan();
+                if(scan.equals(card.getIrisScan())){
+                    this.card = card;
+                    this.active = true;
+                }
+            }
         }
     }
     

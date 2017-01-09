@@ -5,6 +5,8 @@
  */
 package kiosk;
 
+import data.IrisScan;
+
 /**
  *
  * @author Roger
@@ -13,10 +15,12 @@ final public class ActivationCard {
     
     private String code;
     private boolean active;
+    private IrisScan iris;
     
     public ActivationCard(String code){
         this.code = code;
         this.active = true;
+        this.iris = null;
     }
     
     public String getCode(){
@@ -24,7 +28,7 @@ final public class ActivationCard {
     }
     
     public boolean isActive() {
-        return true;
+        return active;
     }
     
     public void erase() {
@@ -37,6 +41,18 @@ final public class ActivationCard {
         if (o == null || getClass() != o.getClass()) return false;
         ActivationCard card = (ActivationCard) o;
         return code.equals(card.code);
+    }
+    
+    public void setIrisScan(IrisScan iris){
+        this.iris = iris;
+    }
+    
+    public IrisScan getIrisScan(){
+        return iris;
+    }
+    
+    public boolean isScan(){
+        if(this.iris==null){ return false;}else{return true;}
     }
     
 }
